@@ -1,0 +1,31 @@
+{
+  "name": "talent-club",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "angular": "^1.6.5",
+    "body-parser": "^1.14.0",
+    "bootstrap": "^3.3.7",
+    "express": "^4.13.3",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "mysql2": "^1.3.5",
+    "sequelize": "^4.3.0"
+  },
+  "devDependencies": {
+    "angular-animate": "^1.6.5",
+    "angular-aria": "^1.6.5",
+    "angular-material": "^1.1.4",
+    "angular-material-icons": "^0.7.1",
+    "angular-ui-router": "^1.0.3",
+    "chai": "^4.0.2",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.6.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-uglify": "^3.0.0",
+    "mocha": "^3.4.2"
+  }
+}
