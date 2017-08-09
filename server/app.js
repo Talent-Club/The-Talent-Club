@@ -24,7 +24,6 @@ const Member = mongoose.model('Member', {
 
 app.use(express.static(path.resolve('dist')));
 app.use(bodyParser.json());
-app.use('/api', require('./api'));
 
 app.post('/talent-club', function (req, res) {
   console.log(req.body);
