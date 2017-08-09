@@ -3,7 +3,9 @@ const $ = require('gulp-load-plugins')();
 
 gulp.task('copy:fonts', () =>
   gulp
-  .src('node_modules/font-awesome/fonts/*')
+  .src(['node_modules/font-awesome/fonts/*',
+    'node_modules/bootstrap/dist/fonts/*'
+    ])
   .pipe(gulp.dest('dist/fonts'))
 );
 
