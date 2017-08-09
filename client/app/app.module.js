@@ -5,6 +5,7 @@
         // Angular modules
         'ngMaterial',
         // Custom modules
+		'app.core',
         'app.landing',
 		'app.login',
 		'app.pending',
