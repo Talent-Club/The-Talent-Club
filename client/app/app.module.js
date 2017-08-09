@@ -12,6 +12,7 @@
 		'app.signUp',
 		'app.splash',
 		'app.stripe',
+		'app.core',
         // 3rd Party Modules
         'ui.router'
     ]).config(appConfig);
