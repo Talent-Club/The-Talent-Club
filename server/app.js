@@ -28,6 +28,7 @@ app.use(express.static(path.resolve('dist')));
 app.use(bodyParser.json());
 app.use('/api', require('./routes'));
 
+
 app.post('/talent-club', function (req, res) {
   console.log(req.body);
   const newMember = new Member(req.body);
