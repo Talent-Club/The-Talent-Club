@@ -5,7 +5,6 @@ const path = require('path');
 
 const app = express();
 
-
 var mongodbUri = 'mongodb://Keaton:talentclub1@ds133670.mlab.com:33670/talent-club';
 mongoose.connect(mongodbUri, { useMongoClient: true });
 
@@ -17,18 +16,23 @@ const Member = mongoose.model('Member', {
   password: String,
   isMember: Boolean,
   phoneNumber: String,
-  URL: String,
   jobTitle: String,
-  hasPaid: Boolean
+  hasPaid: Boolean,
+  socialNetworks: [
+      { name: String,
+          url: String }
+    ]
 });
 
 app.use(express.static(path.resolve('dist')));
 app.use(bodyParser.json());
+app.use('/api', require('./routes'));
+
 
 app.post('/talent-club', function (req, res) {
   console.log(req.body);
   const newMember = new Member(req.body);
-    
+  
    newMember.save(function(err) {
        if(err) {
            res.send('an error has occured: ' + err)
