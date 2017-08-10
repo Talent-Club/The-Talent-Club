@@ -43,7 +43,7 @@
 		});
 
         $stateProvider.state('signUp', {
-			url: '/signUp',
+			url: '/signup',
 			controller: 'SignUpController as signUpCtrl',
 			templateUrl: 'app/signUp/signUp.template.html'
 		});
