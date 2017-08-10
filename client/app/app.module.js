@@ -42,7 +42,8 @@
 			templateUrl: 'app/pending/pending.template.html'
 		});
 
-        $stateProvider.state('signUp', {
+
+        $stateProvider.state('signup', {
 			url: '/signup',
 			controller: 'SignUpController as signUpCtrl',
 			templateUrl: 'app/signUp/signUp.template.html'
