@@ -1,8 +1,6 @@
 const express = require('express');
 const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const path = require('path');
 
 const app = express();
 
