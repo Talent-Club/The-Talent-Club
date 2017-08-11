@@ -5,7 +5,6 @@
         // Angular modules
         'ngMaterial',
         // Custom modules
-		'app.core',
         'app.landing',
 		'app.login',
 		'app.pending',
@@ -42,9 +41,8 @@
 			templateUrl: 'app/pending/pending.template.html'
 		});
 
-
-        $stateProvider.state('signup', {
-			url: '/signup',
+        $stateProvider.state('signUp', {
+			url: '/signUp',
 			controller: 'SignUpController as signUpCtrl',
 			templateUrl: 'app/signUp/signUp.template.html'
 		});
