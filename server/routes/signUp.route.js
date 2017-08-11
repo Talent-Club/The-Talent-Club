@@ -1,12 +1,12 @@
 // REST ACTIONS performed on RESOURCES
 
 const router = require('express').Router();
-const Member = require('../models/member.model');
+const db = require('../models/member.model');
 
 //GET: /api/
-router.post('/talent-club', function (req, res) {
+router.post('/', function (req, res) {
   console.log(req.body);
-  const newMember = new Member(req.body);
+  const newMember = new db(req.body);
   
    newMember.save(function(err) {
        if(err) {
