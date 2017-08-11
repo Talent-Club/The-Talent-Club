@@ -1,7 +1,7 @@
 // REST ACTIONS performed on RESOURCES
 
 const router = require('express').Router();
-const db = require('../models');
+const db = require('../models/member.model');
 
 //GET: /api/
 router.get('/', function (req, res) {
