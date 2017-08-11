@@ -20,17 +20,17 @@ router.get('/:id', function (req, res) {
   });
 });
 
-//Get Emergency Contacts by loginId
-router.get('/:id/emergencyContact', function (req, res) {
-  db.EmergencyContact.findAll({
+
+router.get('/:id', function (req, res) {
+  db.login.findAll({
     where: {
       loginId: req.params.id
     }
-  }).then(function (emergencyContacts) {
-    if (emergencyContacts === null) {
+  }).then(function (login) {
+    if (login === null) {
       res.sendStatus(404);
     } else {
-      res.json(emergencyContacts);
+      res.json(login);
     }
   });
 });

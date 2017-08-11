@@ -20,17 +20,17 @@ router.get('/:id', function (req, res) {
   });
 });
 
-//Get Emergency Contacts by stripeId
-router.get('/:id/emergencyContact', function (req, res) {
-  db.EmergencyContact.findAll({
+
+router.get('/:id', function (req, res) {
+  db.stripe.findAll({
     where: {
       stripeId: req.params.id
     }
-  }).then(function (emergencyContacts) {
-    if (emergencyContacts === null) {
+  }).then(function () {
+    if (stripe === null) {
       res.sendStatus(404);
     } else {
-      res.json(emergencyContacts);
+      res.json(stripe);
     }
   });
 });
