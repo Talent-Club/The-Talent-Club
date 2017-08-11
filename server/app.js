@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 
+
 const app = express();
 
 const db = require('./models/member.model');
@@ -20,6 +21,7 @@ app.use('/api', require('./routes'));
 app.post('/talent-club', function (req, res) {
   console.log(req.body);
   const newMember = new db(req.body);
+
   
    newMember.save(function(err) {
        if(err) {
