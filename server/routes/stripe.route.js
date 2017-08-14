@@ -1,6 +1,8 @@
 // REST ACTIONS performed on RESOURCES
 
 const router = require('express').Router();
+const requiresAuth = require('../lib/requiresAuth');
+const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
 const db = require('../models/member.model');
 
 //GET: /api/

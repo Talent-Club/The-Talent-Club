@@ -1,5 +1,5 @@
 const express = require('express');
-const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
+const passport = require('passport');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -15,6 +15,11 @@ mongoose.connect(mongodbUri, { useMongoClient: true });
 
 app.use(express.static(path.resolve('dist')));
 app.use(bodyParser.json());
+
+app.use(passport.initialize());
+
+require('./config/passport')(passport);
+
 app.use('/api', require('./routes'));
 
 
