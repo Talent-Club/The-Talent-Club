@@ -11,20 +11,27 @@
   </md-card-title>
 </md-card>
 
-<center>
-  <md-content class="md-no-momentum">
+
+  <div class="md-whiteframe-z1">
+  <md-content layout-padding>
+    <div layout-gt-sm="row">
     <md-input-container class="md-block" flex-gt-sm>
-                <label>Username <i class="fa fa-user-o" aria-hidden="true"></i>:</label>
+                <label>Email <i class="fa fa-envelope" aria-hidden="true"></i>:</label>
                 <br>
                 <input type="text">
             </md-input-container>
+    </div>
 
+             <div layout-gt-sm="row">
      <md-input-container class="md-block" flex-gt-sm>
                 <label>Password <i class="fa fa-unlock-alt" aria-hidden="true"></i>:</label>
                 <br>
                  <input type="password">
             </md-input-container>
+             </div>
+          <div layout="row" layout-align="end center">
             <md-button class="md-accent md-raised md-hue-3" type="cancel">Cancel</md-button>
             <md-button class="md-raised" type="submit">Submit</md-button>
-  </md-content>
-</center>
+             </div>
+          </md-content>
+   </div>
