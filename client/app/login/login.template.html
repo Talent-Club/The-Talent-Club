@@ -14,17 +14,20 @@
 <center>
   <md-content class="md-no-momentum">
     <md-input-container class="md-block" flex-gt-sm>
-                <label>Username <i class="fa fa-user-o" aria-hidden="true"></i>:</label>
+                <label>Email <i class="fa fa-user-o" aria-hidden="true"></i>:</label>
                 <br>
-                <input type="text">
+                <input type="text" ng-model="loginCtrl.email">
             </md-input-container>
 
      <md-input-container class="md-block" flex-gt-sm>
                 <label>Password <i class="fa fa-unlock-alt" aria-hidden="true"></i>:</label>
                 <br>
-                 <input type="password">
+                 <input type="password" ng-model="loginCtrl.password">
             </md-input-container>
             <md-button class="md-accent md-raised md-hue-3" type="cancel">Cancel</md-button>
-            <md-button class="md-raised" type="submit">Submit</md-button>
+            <md-button class="md-raised" type="submit" ng-click="loginCtrl.login(loginCtrl.email, loginCtrl.password)">Submit</md-button>
   </md-content>
 </center>
+<pre>
+{{ loginCtrl | json}}
+</pre>

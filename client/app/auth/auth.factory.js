@@ -35,7 +35,7 @@
             logout();
 
             return $http
-                .post(apiUrl + 'users/register', registration)
+                .post(apiUrl + '/signup', registration)
                 .then(function(response) {
                     return response.data;
                 });
@@ -45,13 +45,13 @@
             logout();
             
             return $http
-                .post(apiUrl + 'users/login', { 
+                .post(apiUrl + 'members/login', { 
                     email: email, 
                     password: password 
                 })
                 .then(function({ data }) {
                     localStorageService.set('auth', {
-                        token: data.token,
+                        // token: data.token,
                         email: email
                     });
 

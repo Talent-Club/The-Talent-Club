@@ -1,18 +1,29 @@
-(function(){
+(function() {
     'use strict';
 
     angular
         .module('app.login')
-        .controller('LoginController', LoginController)
+        .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['loginFactory'];
+    LoginController.$inject = ['$state', 'authFactory'];
 
-    function LoginController(loginFactory) {
-        /* jshint validthis:true */
+    /* @ngInject */
+    function LoginController($state, authFactory) {
         var vm = this;
 
-        activate();
+        vm.login = login;        
 
-        function activate() { }
+        ////////////////
+
+        function login() {
+        	authFactory
+                .login(vm.email, vm.password)
+                .then(function(response) {
+        			$state.go('pending');
+        		})
+                .catch(function(error) {
+        			alert(error.error_description);
+        		});
+        }
     }
 })();

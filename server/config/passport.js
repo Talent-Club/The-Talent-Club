@@ -1,5 +1,5 @@
 const { Strategy, ExtractJwt } = require('passport-jwt');
-const member = require('../models/member.model');
+const db = require('../models/member.model');
 const _ = require('lodash');
 
 module.exports = function initializePassport(passport) {

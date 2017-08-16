@@ -3,7 +3,8 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
-
+const logger = require('./lib/logger');
+const gzip = require('compression');
 
 const app = express();
 
@@ -15,12 +16,13 @@ mongoose.connect(mongodbUri, { useMongoClient: true });
 
 app.use(express.static(path.resolve('dist')));
 app.use(bodyParser.json());
-
 app.use(passport.initialize());
 
 require('./config/passport')(passport);
 
 app.use('/api', require('./routes'));
+
+
 
 
 app.post('/talent-club', function (req, res) {

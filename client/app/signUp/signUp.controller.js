@@ -5,14 +5,25 @@
         .module('app.signUp')
         .controller('SignUpController', SignUpController)
 
-    SignUpController.$inject = ['signUpFactory'];
+    SignUpController.$inject = ['signUpFactory','authFactory'];
 
-    function SignUpController(signUpFactory) {
+    function SignUpController(signUpFactory, authFactory) {
         /* jshint validthis:true */
         var vm = this;
 
-        activate();
+        vm.register = register;
 
-        function activate() { }
+        function register(registration) {
+            authFactory 
+                .register(registration)
+                .then(function(response) {
+        			$state.go('pending');
+        		})
+                .catch(function(error) {
+        			alert(error.error_description);
+        		});
+        }
     }
+
+    
 })();
