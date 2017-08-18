@@ -14,7 +14,7 @@
         vm.register = register;
         
         function register(registration) {
-            console.log('hello');
+            console.log(registration);
             authFactory 
                 .register(registration)
                 .then(function(response) {
