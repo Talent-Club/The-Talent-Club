@@ -20,7 +20,7 @@
 
 		function getAll() {
 			return $http
-				.get('/api/signUp')
+				.get('/api/signup')
 				.then(function (response) {
 					return response.data;
 				});
@@ -28,7 +28,7 @@
 
 		function getById(id) {
 			return $http
-				.get('/api/signUp/' + id)
+				.get('/api/signup/' + id)
 				.then(function (response) {
 					return response.data;
 				});
@@ -36,7 +36,7 @@
 
 		function create(signUp) {
 			return $http
-				.post('/api/signUp', signUp)
+				.post('/api/signup', signUp)
 				.then(function (response) {
 					return response.data;
 				});
@@ -44,7 +44,7 @@
 
 		function update(signUp) {
 			return $http
-				.put('/api/signUp/' + signUp.id, signUp)
+				.put('/api/signup/' + signUp.id, signUp)
 				.then(function (response) {
 					return response.data;
 				});
@@ -52,7 +52,7 @@
 
 		function remove(signUp) {
 			return $http
-				.delete('/api/signUp/' + signUp.id)
+				.delete('/api/signup/' + signUp.id)
 				.then(function (response) {
 					return response.data;
 				});

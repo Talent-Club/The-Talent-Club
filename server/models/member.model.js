@@ -30,7 +30,7 @@ const MemberSchema = new Schema({
         name: String,
         url: String
     }],
-    stripeCharge: { type: Object, required: true }
+    stripeCharge: { type: Object }
 });
 
 MemberSchema.pre('save', hashPassword);

@@ -49,7 +49,9 @@
                     email: email, 
                     password: password 
                 })
-                .then(function({ data }) {
+                .then(function(response) {
+                    var data = response.data;
+
                     localStorageService.set('auth', {
                         // token: data.token,
                         email: email

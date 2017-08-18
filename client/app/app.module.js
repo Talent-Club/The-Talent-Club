@@ -2,21 +2,26 @@
 	'use strict';
 
 	angular.module('app', [
-		// Angular modules
-		'ngMaterial',
-		// Custom modules
-		'app.auth',
-		'app.core',
-		'app.landing',
-		'app.login',
-		'app.pending',
-		'app.signUp',
-		'app.splash',
-		'app.stripe',
-		'app.core',
-		// 3rd Party Modules
-		'ui.router'
-	]).config(appConfig);
+			// Angular modules
+			'ngMaterial',
+			// Custom modules
+			'app.auth',
+			'app.core',
+			'app.landing',
+			'app.login',
+			'app.pending',
+			'app.signUp',
+			'app.splash',
+			'app.stripe',
+			'app.core',
+			// 3rd Party Modules
+			'ui.router',
+			'LocalStorageModule',
+			'stripe.checkout'
+		])
+		.value('apiUrl', 'http://localhost:3000/api')
+		.config(appConfig)
+		.run(appRun);
 
 	appConfig.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider', 'StripeCheckoutProvider'];
 
@@ -47,7 +52,7 @@
 		});
 
 
-		$stateProvider.state('signup', {
+		$stateProvider.state('signUp', {
 			url: '/signup',
 			controller: 'SignUpController as signUpCtrl',
 			templateUrl: 'app/signUp/signUp.template.html'
@@ -66,7 +71,9 @@
 		});
 	}
 
-	.run(function ($log, StripeCheckout) {
+	appRun.$inject = ['$log', 'StripeCheckout'];
+
+	function appRun($log, StripeCheckout) {
 		// You can set defaults here, too.
 		StripeCheckout.defaults({
 			opened: function () {
@@ -76,5 +83,5 @@
 				$log.debug("Stripe Checkout closed");
 			}
 		});
-	});
+	}
 })();
