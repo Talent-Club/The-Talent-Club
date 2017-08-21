@@ -5,20 +5,9 @@ const db = require('../models/member.model');
 var helper = require('sendgrid').mail;
 const sendGridAPI = process.env.SENDGRID_API_KEY;
 const email = process.env.EMAIL;
-
-
-router.post('/', function (req, res) {
-    console.log(req.body);
-    const newMember = new db(req.body);
-
-    newMember.save(function (err) {
-        if (err) {
-            res.send('an error has occured: ' + err)
-        } else {
-            res.send('Yes')
-        }
-    });
-});
+const requiresAuth = require('../lib/requiresAuth');
+const jwt = require('jsonwebtoken');
+const Promise = require('bluebird');
 
 router.get('/', function (req, res) {
 
@@ -45,5 +34,37 @@ router.get('/', function (req, res) {
         res.send('ok')
     });
 });
+
+router.post('/', function register(req, res, next) {
+    console.log(req.body);
+        if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.password) {
+            res.status(400).json({
+                errors: ['Please enter all required fields']
+            });
+        } else {
+            const newMember = new db({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                password: req.body.password,
+            });
+
+            newMember
+                .save()
+                .then(() => res.json({
+                    message: 'Successfully registered new user'
+                }))
+                .catch(err => {
+                    if (err.code && err.code === 11000) {
+                        res.status(400).send({
+                            'errors': ['Email already registered']
+                        });
+                    } else {
+                        next(err);
+                    }
+                });
+        }
+    }
+);
 
 module.exports = router;
