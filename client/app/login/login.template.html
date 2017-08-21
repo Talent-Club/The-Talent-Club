@@ -11,9 +11,12 @@
   </md-card-title>
 </md-card>
 
-<center>
-  <md-content class="md-no-momentum">
+
+  <div class="md-whiteframe-z1">
+  <md-content layout-padding>
+    <div layout-gt-sm="row">
     <md-input-container class="md-block" flex-gt-sm>
+
       <label>Email <i class="fa fa-user-o" aria-hidden="true"></i>:</label>
       <br>
       <input type="text" ng-model="loginCtrl.email">
