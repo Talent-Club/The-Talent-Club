@@ -4,8 +4,9 @@ const router = require('express').Router();
 const db = require('../models/member.model');
 var helper = require('sendgrid').mail;
 const sendGridAPI = process.env.SENDGRID_API_KEY;
-const email = process.env.EMAIL;
-
+const myEmail = process.env.MYEMAIL;
+const newAppTemp = process.env.NEWAPP_TEMPLATE;
+const appEmail = process.env.APP_EMAIL;
 
 router.post('/', function (req, res) {
     console.log(req.body);
@@ -20,13 +21,24 @@ router.post('/', function (req, res) {
     });
 });
 
-router.get('/', function (req, res) {
+function signUpEmail (email, userId) {
 
-    var fromEmail = new helper.Email('reply@talentclub.com');
-    var toEmail = new helper.Email(email);
+    var fromEmail = new helper.Email(appEmail);
+    var toEmail = new helper.Email(myEmail);
     var subject = 'A new application has been submitted!';
-    var content = new helper.Content('text/plain', 'A new applicant wants to join the Talent Club!');
+    var content = new helper.Content('text/html', ' ');
     var mail = new helper.Mail(fromEmail, subject, toEmail, content);
+    mail.setTemplateId(newAppTemp);
+
+    var personalization = new helper.Personalization();
+    personalization.addTo(toEmail);
+    personalization.addSubstitution({ '%name%':'Casey'});
+    personalization.addSubstitution({ '%Weblink%':'https://www.linkedin.com/in/casey-ledbetter-bb4010110/'});
+    personalization.addSubstitution({ '%email%':'email.com'});
+    
+    mail.addPersonalization(personalization);
+
+
 
     var sg = require('sendgrid')(sendGridAPI);
     var request = sg.emptyRequest({
@@ -37,13 +49,11 @@ router.get('/', function (req, res) {
 
     sg.API(request, function (error, response) {
         if (error) {
-            console.log('Error response received');
+            console.log(error);
         }
-        console.log(response.statusCode);
-        console.log(response.body);
-        console.log(response.headers);
-        res.send('ok')
+        console.log('Email is on the way');
+        res.send('ok');
     });
-});
+};
 
 module.exports = router;

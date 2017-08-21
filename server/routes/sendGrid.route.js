@@ -1,3 +1,7 @@
+// const router = require('express').Router();
+// const db = require('../models/member.model');
+
+
 var sg = require('sendgrid')(process.env.SENDGRID_API_KEY)
 
 ///////////////////////////////////////////////////
