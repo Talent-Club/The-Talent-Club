@@ -20,17 +20,17 @@ router.get('/:id', function (req, res) {
   });
 });
 
-//Get Emergency Contacts by splashId
-router.get('/:id/emergencyContact', function (req, res) {
-  db.EmergencyContact.findAll({
+
+router.get('/:id', function (req, res) {
+  db.splash.findAll({
     where: {
       splashId: req.params.id
     }
-  }).then(function (emergencyContacts) {
-    if (emergencyContacts === null) {
+  }).then(function (splash) {
+    if (splash === null) {
       res.sendStatus(404);
     } else {
-      res.json(emergencyContacts);
+      res.json(splash);
     }
   });
 });

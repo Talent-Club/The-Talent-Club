@@ -23,46 +23,52 @@
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>First name</label>
-                    <input>
+                    <input ng-model="signUpCtrl.registration.firstName">
                 </md-input-container>
 
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Last Name</label>
-                    <input>
+                    <input ng-model="signUpCtrl.registration.lastName">
                 </md-input-container>
             </div>
 
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Job Title</label>
-                    <input>
+                    <input ng-model="signUpCtrl.registration.jobTitle">
                 </md-input-container>
 
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Social Network</label>
-                    <input type="email">
+                    <input ng-model="signUpCtrl.registration.socialNetworks.name">
                 </md-input-container>
             </div>
 
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>E-mail</label>
-                    <input>
+                    <input ng-model="signUpCtrl.registration.email">
                 </md-input-container>
 
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Super secret password thats not password (Matthew)</label>
-                    <input type="email">
+                    <input type="password" ng-model="signUpCtrl.registration.password">
                 </md-input-container>
             </div>
             <div layout="row" layout-align="end center">
                 <md-button class="md-raised md-warn">
                     Abort!
                 </md-button>
-                <md-button class="md-primary md-raised">
-                    Register
+
+
+                <md-button class="md-primary md-raised" ng-click="signUpCtrl.register(signUpCtrl.registration)">
+                    Lets get it
+
                 </md-button>
             </div>
         </md-content>
     </div>
 </div>
+<pre>
+{{ signUpCtrl | json}}
+</pre>
