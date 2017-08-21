@@ -19,12 +19,12 @@
         ////////////////
 
         function login(email, password) {
-            console.log('hello');
+            
         	authFactory
                 .login(email, password)
                 .then(function(response) {
                     console.log('world');
-        			$state.go('pending');
+        			$state.go('splash');
         		})
                 .catch(function(error) {
                     console.log('error');

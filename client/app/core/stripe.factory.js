@@ -3,60 +3,23 @@
 
     angular
         .module('app.core')
-        .factory('stripeFactory', stripeFactory)
+        .factory('orderFactory', orderFactory)
 
-    stripeFactory.$inject = ['$http'];
+    orderFactory.$inject = ['$http', 'apiUrl'];
 
-    function stripeFactory($http) {
+    function orderFactory($http, apiUrl) {
         var service = {
-			getAll: getAll,
-			getById: getById,
-			create: create,
-			update: update,
-			remove: remove
-		};
+            create: create
+        };
 
-		return service;
+        return service;
 
-		function getAll() {
-			return $http
-				.get('/api/stripe')
-				.then(function (response) {
-					return response.data;
-				});
-		}
-
-		function getById(id) {
-			return $http
-				.get('/api/stripe/' + id)
-				.then(function (response) {
-					return response.data;
-				});
-		}
-
-		function create(stripe) {
-			return $http
-				.post('/api/stripe', stripe)
-				.then(function (response) {
-					return response.data;
-				});
-		}
-
-		function update(stripe) {
-			return $http
-				.put('/api/stripe/' + stripe.id, stripe)
-				.then(function (response) {
-					return response.data;
-				});
-		}
-
-		function remove(stripe) {
-			return $http
-				.delete('/api/stripe/' + stripe.id)
-				.then(function (response) {
-					return response.data;
-				});
-		}
-
+        function create(product, stripeToken) {
+          return $http
+            .post(apiUrl + 'orders/' + stripeToken, product)
+            .then(function(response) {
+              return response.data;
+            });
+        }
     }
 })();
