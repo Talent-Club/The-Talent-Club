@@ -8,16 +8,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="css/bundle.min.css">
+
+  <div class="header">
+    <md-card-title>
+      <md-content class="md-padding header" layout="row" layout-align="end center">
+        
+        <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+          <md-nav-item md-nav-click="goto('page1')" name="page1">
+            Log In
+          </md-nav-item>
+          <md-nav-item md-nav-click="goto('page2')" name="page2">
+            Apply
+          </md-nav-item>
+          <!-- these require actual routing with ui-router or ng-route, so they
+      won't work in the demo
+      <md-nav-item md-nav-href="#page4" name="page5">Page Four</md-nav-item>
+      <md-nav-item md-nav-sref="app.page5" name="page4">Page Five</md-nav-item>
+      You can also add options for the <code>ui-sref-opts</code> attribute.
+      <md-nav-item md-nav-sref="page6" sref-opts="{reload:true, notify:true}">
+        Page Six
+      </md-nav-item>
+      -->
+      <span flex></span>
+        </md-nav-bar>
+      </md-content>
+  </div>
+
+  <md-card-title-text layout-align="center center" layout="column">
+    
+    <br>
+      <img src="/images/talentclub.jpg" style="width :200px">
+      <span class="md-subhead description">Join us Today.</span>
+      <br>
+ 
+  </md-card-title-text>
+  </md-card-title>
+
 </head>
 
 <body>
+  <div layout="column" layout-fill>
+    <main flex>
+      <div class="container">
 
-  <div class="container">
+        <div ui-view></div>
+      </div>
 
-    <div ui-view></div>
+      <script src="js/bundle.min.js"></script>
+
+
+    </main>
+    <div class="wrapper">
+      <footer>
+        <md-toolbar class="md-scroll-shrink footer">
+          <div layout="row" layout-align="center center" flex>
+            San Diego, California
+          </div>
+        </md-toolbar>
+      </footer>
+    </div>
   </div>
 
-  <script src="js/bundle.min.js"></script>
 </body>
 
 </html>

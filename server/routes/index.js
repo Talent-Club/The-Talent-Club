@@ -10,7 +10,7 @@ router.use('/login', require('./login.route'));
 router.use('/signup', require('./signUp.route'));
 router.use('/splash', require('./splash.route'));
 router.use('/stripe', require('./stripe.route'));
-router.use('/sendgrid', require('./sendGrid.route'));
+// router.use('/sendgrid', require('./sendGrid.route'));
 
 
 module.exports = router;
