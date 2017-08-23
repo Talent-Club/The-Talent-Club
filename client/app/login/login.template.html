@@ -1,5 +1,11 @@
-<center>
-  <div class="md-whiteframe-z1" flex=50 layout-align="center center">
+  <div layout="row" layout-align="center center">
+    <div class="md-whiteframe-z1" flex=50 layout-align="center center">
+        <md-toolbar class="md-hue-3">
+            <div class="md-toolbar-tools">
+                <h2>Please Sign in</h2>
+            </div>
+        </md-toolbar>
+
   <md-content layout-padding>
     <div layout-gt-sm="column">
     <md-input-container class="md-block" flex-gt-sm>
@@ -14,10 +20,13 @@
       <br>
       <input type="password" ng-model="loginCtrl.password">
     </md-input-container>
-    <md-button class="md-accent md md-hue-3" type="cancel">Cancel</md-button>
-    <md-button class="md-raised" type="submit" ng-click="loginCtrl.login(loginCtrl.email, loginCtrl.password)">Submit</md-button>
+
+    <div layout="row" layout-align="end center">
+    <md-button class="md-warn md-raised md-hue-3" type="cancel">Cancel</md-button>
+    <md-button class="md-primary md-raised md-hue-3" type="submit" ng-click="loginCtrl.login(loginCtrl.email, loginCtrl.password)">Submit</md-button>
   </md-content>
+</div>
 <pre>
 {{ loginCtrl | json}}
 </pre>
-</center>
+
