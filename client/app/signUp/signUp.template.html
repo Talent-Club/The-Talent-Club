@@ -1,21 +1,8 @@
-<md-card>
-    <md-card-title>
-        <md-card-title-media>
-            <div class="md-media-sm card-media">
-            </div>
-        </md-card-title-media>
-        <md-card-title-text>
-            <span class="md-headline"><strong><i class="fa fa-spinner" aria-hidden="true"></i> Talent Club</strong></span>
-            <span class="md-subhead description">Become a member Today!</span>
-        </md-card-title-text>
-    </md-card-title>
-</md-card>
-
 <div layout="row" layout-align="center center">
     <div class="md-whiteframe-z1" flex=50 layout-align="center center">
-        <md-toolbar>
+        <md-toolbar class="md-hue-3">
             <div class="md-toolbar-tools">
-                <h2>Sign Up!</h2>
+                <h2>Please Sign up</h2>
             </div>
         </md-toolbar>
 
@@ -25,42 +12,46 @@
                     <label>First name</label>
                     <input ng-model="signUpCtrl.registration.firstName">
                 </md-input-container>
-
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Last Name</label>
                     <input ng-model="signUpCtrl.registration.lastName">
                 </md-input-container>
             </div>
-
-            <div layout-gt-sm="row">
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Job Title</label>
-                    <input ng-model="signUpCtrl.registration.jobTitle">
+            <div>
+                <md-input-container class="md-block" layout-gt-sm="row" flex-gt-sm ng-repeat="socialNetwork in signUpCtrl.registration.socialNetworks">
+                    <label> {{socialNetwork.name}}</label>
+                    <input ng-model="socialNetwork.url">
                 </md-input-container>
-
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Social Network</label>
-                    <input ng-model="signUpCtrl.registration.socialNetworks.name">
+                <br>
+            </div>
+            <div layout-gt-sm="row">
+                <md-input-container class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Add Social Network <span class="caret"></span>
+                        </button>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="name in ['Facebook', 'LinkedIn', 'GitHub']">
+                            <a ng-click="signUpCtrl.addSocialNetwork(signUpCtrl.registration, name, signUpCtrl.registration.socialNetworks.url)">{{name}}</a>
+                        </li>
+                    </ul>
                 </md-input-container>
             </div>
-
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>E-mail</label>
                     <input ng-model="signUpCtrl.registration.email">
                 </md-input-container>
-
                 <md-input-container class="md-block" flex-gt-sm>
-                    <label>Super secret password thats not password (Matthew)</label>
+                    <label>Password thats not password (Matthew)</label>
                     <input type="password" ng-model="signUpCtrl.registration.password">
                 </md-input-container>
             </div>
             <div layout="row" layout-align="end center">
-                <md-button class="md-raised md-warn">
-                    Abort!
+                <md-button class="md-warn md-raised md-hue-3">
+                    Cancel
                 </md-button>
-                <md-button class="md-primary md-raised" ng-click="signUpCtrl.register(signUpCtrl.registration)">
-                    Lets get it
+                <md-button class="md-primary md-raised md-hue-3" ng-click="signUpCtrl.register(signUpCtrl.registration)">
+                    Apply!
                 </md-button>
             </div>
         </md-content>
