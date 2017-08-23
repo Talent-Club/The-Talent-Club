@@ -95,4 +95,9 @@ router.post('/', function register(req, res, next) {
     }
 );
 
+router.get('/:id', (req,res) => {
+    db.findOne({ '_id': req.params.id},'firstName lastName jobTitle email socialNetworks', function (err, member) {
+        res.json(member);
+    });
+});
 module.exports = router;
