@@ -23,12 +23,13 @@
         	authFactory
                 .login(email, password)
                 .then(function(response) {
+                    console.log(response);
                     console.log('world');
         			$state.go('splash');
         		})
                 .catch(function(error) {
-                    console.log('error');
-        			alert(error.error_description);
+                    // console.log('error');
+        			alert('Email or password incorrect');
         		});
         }
 

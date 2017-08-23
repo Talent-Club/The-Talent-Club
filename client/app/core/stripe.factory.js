@@ -14,9 +14,9 @@
 
         return service;
 
-        function create(product, stripeToken) {
+        function create(stripeToken) {
           return $http
-            .post(apiUrl + 'orders/' + stripeToken, product)
+            .post(apiUrl + 'stripe/' + stripeToken)
             .then(function(response) {
               return response.data;
             });

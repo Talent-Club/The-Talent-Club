@@ -10,8 +10,8 @@ module.exports = router;
 
 
 function login(req, res, next) {
-    let promiseA = MemberSchema.findOne({ email: req.body.email }).exec();
-    let promiseB = promiseA.then(member => member.comparePassword(req.body.password));
+    let promiseA = db.findOne({ email: req.body.email }).exec();
+    let promiseB = promiseA.then(member => member && member.comparePassword(req.body.password));
 
     Promise
         .all([

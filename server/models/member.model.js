@@ -23,7 +23,6 @@ const MemberSchema = new Schema({
         required: true
     },
     isMember: Boolean,
-    jobTitle: String,
     hasPaid: Boolean,
     activatedSlack: Boolean,
     socialNetworks: [{
