@@ -5,10 +5,10 @@
         .module('app.login')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$state', 'authFactory'];
+    LoginController.$inject = ['$state', '$stateParams', 'authFactory'];
 
     /* @ngInject */
-    function LoginController($state, authFactory) {
+    function LoginController($state, $stateParams, authFactory) {
         var vm = this;
 
         vm.login = login;
@@ -19,16 +19,19 @@
         ////////////////
 
         function login(email, password) {
-            console.log('hello');
+            
         	authFactory
                 .login(email, password)
                 .then(function(response) {
+                    console.log(response);
                     console.log('world');
-        			$state.go('pending');
+        			$state.go('splash', {
+                        id: $stateParams.id
+                    });
         		})
                 .catch(function(error) {
-                    console.log('error');
-        			alert(error.error_description);
+                    // console.log('error');
+        			alert('Email or password incorrect');
         		});
         }
 

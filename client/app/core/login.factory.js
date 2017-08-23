@@ -1,14 +1,14 @@
-(function () {
-	'use strict';
+(function(){
+    'use strict';
 
-	angular
-		.module('app.core')
-		.factory('loginFactory', loginFactory);
+    angular
+        .module('app.core')
+        .factory('loginFactory', loginFactory)
 
-	loginFactory.$inject = ['$http'];
+    loginFactory.$inject = ['$http'];
 
-	function loginFactory($http) {
-		var service = {
+    function loginFactory($http) {
+        var service = {
 			getAll: getAll,
 			getById: getById,
 			create: create,
@@ -58,5 +58,5 @@
 				});
 		}
 
-	}
+    }
 })();

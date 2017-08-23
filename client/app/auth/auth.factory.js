@@ -45,7 +45,7 @@
             logout();
             
             return $http
-                .post(apiUrl + 'members/login', { 
+                .post(apiUrl + '/login', { 
                     email: email, 
                     password: password 
                 })

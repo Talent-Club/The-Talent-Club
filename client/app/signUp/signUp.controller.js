@@ -20,12 +20,13 @@
             console.log(registration);
             authFactory
                 .register(registration)
+
                 .then(function (response) {
-                    console.log('world');
+                    
                     $state.go('pending');
                 })
                 .catch(function (error) {
-                    console.log('error');
+                   
                     alert(error.error_description);
                 });
         }
@@ -36,6 +37,7 @@
                 name: name,
                 url: url
             });
+
         }
 
         
