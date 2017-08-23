@@ -28,7 +28,7 @@ const jwt = require('jsonwebtoken');
 const Promise = require('bluebird');
 
 
-function signUpEmail (email, userId) {
+function signUpEmail(member) {
 
     var fromEmail = new helper.Email(appEmail);
     var toEmail = new helper.Email(myEmail);
@@ -39,10 +39,16 @@ function signUpEmail (email, userId) {
 
     var personalization = new helper.Personalization();
     personalization.addTo(toEmail);
-    personalization.addSubstitution({ '%name%':'Casey'});
-    personalization.addSubstitution({ '%Weblink%':'https://www.linkedin.com/in/casey-ledbetter-bb4010110/'});
-    personalization.addSubstitution({ '%email%':'email.com'});
-    
+    personalization.addSubstitution({
+        '%name%': member.firstName
+    });
+    personalization.addSubstitution({
+        '%url%': member.socialNetworks[0].url
+    });
+    personalization.addSubstitution({
+        '%email%': member.email
+    });
+
     mail.addPersonalization(personalization);
 
 
@@ -54,50 +60,55 @@ function signUpEmail (email, userId) {
         body: mail.toJSON()
     });
 
-    sg.API(request, function (error, response) {
-        if (error) {
-            console.log(error);
+    sg.API(request, function (err, res) {
+        if (err) {
+            res.statusCode(400).send('Something happened, its not you its us.')
+            console.log(err);
+        } else {
+            console.log('Email is on the way');
+            res.status(200).send('ok');
         }
-        console.log('Email is on the way');
-        res.send('ok');
     });
 };
 
 router.post('/', function register(req, res, next) {
     console.log(req.body);
-        if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.password) {
-            res.status(400).json({
-                errors: ['Please enter all required fields']
-            });
-        } else {
-            const newMember = new db({
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                password: req.body.password,
-            });
+    if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.password) {
+        res.status(400).json({
+            errors: ['Please enter all required fields']
+        });
+    } else {
+        const newMember = new db({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: req.body.password,
+        });
 
-            newMember
-                .save()
-                .then(() => res.json({
-                    message: 'Successfully registered new user'
-                }))
-                .catch(err => {
-                    if (err.code && err.code === 11000) {
-                        res.status(400).send({
-                            'errors': ['Email already registered']
-                        });
-                    } else {
-                        next(err);
-                    }
-                });
-        }
+        newMember
+            .save()
+            .then(() => res.json({
+                message: 'Successfully registered new user'
+            }))
+            .catch(err => {
+                if (err.code && err.code === 11000) {
+                    res.status(400).send({
+                        'errors': ['Email already registered']
+                    });
+                } else {
+                    next(err);
+                }
+            });
     }
-);
+});
 
-router.get('/:id', (req,res) => {
-    db.findOne({ '_id': req.params.id},'firstName lastName jobTitle email socialNetworks', function (err, member) {
+router.get('/:id', (req, res) => {
+    db.findOne({
+        '_id': req.params.id
+    }, 'firstName lastName jobTitle email socialNetworks', function (err, member) {
         res.json(member);
+        signUpEmail(member);        
     });
+
 });
 module.exports = router;
