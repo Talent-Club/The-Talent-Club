@@ -59,7 +59,7 @@
 		});
 
 		$stateProvider.state('splash', {
-			url: '/splash',
+			url: '/splash?id',
 			controller: 'SplashController as splashCtrl',
 			templateUrl: 'app/splash/splash.template.html'
 		});

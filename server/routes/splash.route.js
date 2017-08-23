@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/:id', function (req, res) {
-  db.Splash.findById(req.params.id).then(function (splash) {
+  db.findById(req.params.id).then(function (splash) {
     if (splash === null) {
       res.sendStatus(404);
     } else {

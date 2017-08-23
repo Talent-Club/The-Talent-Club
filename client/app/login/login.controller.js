@@ -5,10 +5,10 @@
         .module('app.login')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$state', 'authFactory'];
+    LoginController.$inject = ['$state', '$stateParams', 'authFactory'];
 
     /* @ngInject */
-    function LoginController($state, authFactory) {
+    function LoginController($state, $stateParams, authFactory) {
         var vm = this;
 
         vm.login = login;
@@ -25,7 +25,9 @@
                 .then(function(response) {
                     console.log(response);
                     console.log('world');
-        			$state.go('splash');
+        			$state.go('splash', {
+                        id: $stateParams.id
+                    });
         		})
                 .catch(function(error) {
                     // console.log('error');
