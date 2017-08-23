@@ -11,36 +11,33 @@
 
   <div class="header">
     <md-card-title>
+
       <md-content class="md-padding header" layout="row" layout-align="end center">
-        
+
+        <div class="leftM" flex>
+          <img ui-sref="landing" src="/images/logo.png" class="small">
+        </div>
+
         <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-          <md-nav-item md-nav-click="goto('page1')" name="page1">
+          <md-nav-item md-nav-sref="login">
             Log In
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page2')" name="page2">
-            Apply
+          <md-nav-item md-nav-sref="signup">
+            Sign Up
           </md-nav-item>
-          <!-- these require actual routing with ui-router or ng-route, so they
-      won't work in the demo
-      <md-nav-item md-nav-href="#page4" name="page5">Page Four</md-nav-item>
-      <md-nav-item md-nav-sref="app.page5" name="page4">Page Five</md-nav-item>
-      You can also add options for the <code>ui-sref-opts</code> attribute.
-      <md-nav-item md-nav-sref="page6" sref-opts="{reload:true, notify:true}">
-        Page Six
-      </md-nav-item>
-      -->
-      <span flex></span>
+          <span flex></span>
         </md-nav-bar>
       </md-content>
+    </md-card-title>
   </div>
 
   <md-card-title-text layout-align="center center" layout="column">
-    
+
     <br>
-      <img src="/images/talentclub.jpg" style="width :200px">
-      <span class="md-subhead description">Join us Today.</span>
-      <br>
- 
+    <img src="/images/talentclub.jpg" style="width :200px">
+    <span class="md-subhead description">Join us Today.</span>
+    <br>
+
   </md-card-title-text>
   </md-card-title>
 
