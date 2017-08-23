@@ -5,14 +5,16 @@
         .module('app.pending')
         .controller('PendingController', PendingController)
 
-    PendingController.$inject = ['pendingFactory'];
+    PendingController.$inject = ['$stateParams','$state'];
 
-    function PendingController(pendingFactory) {
+    function PendingController($stateParams, $state) {
         /* jshint validthis:true */
         var vm = this;
 
         activate();
 
-        function activate() { }
+        function activate() { 
+            setTimeout(function(){ $state.go('landing'); }, 10000);
+        }
     }
 })();
