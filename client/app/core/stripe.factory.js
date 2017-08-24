@@ -5,9 +5,11 @@
         .module('app.core')
         .factory('stripeFactory', stripeFactory)
 
+
     stripeFactory.$inject = ['$http', 'apiUrl'];
 
     function stripeFactory($http, apiUrl) {
+ 
         var service = {
             create: create
         };
