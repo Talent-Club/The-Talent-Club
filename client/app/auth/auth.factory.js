@@ -53,7 +53,7 @@
                     var data = response.data;
 
                     localStorageService.set('auth', {
-                        // token: data.token,
+                        token: data.token,
                         email: email
                     });
 

@@ -3,11 +3,11 @@
 
     angular
         .module('app.core')
-        .factory('orderFactory', orderFactory)
+        .factory('stripeFactory', stripeFactory)
 
-    orderFactory.$inject = ['$http', 'apiUrl'];
+    stripeFactory.$inject = ['$http', 'apiUrl'];
 
-    function orderFactory($http, apiUrl) {
+    function stripeFactory($http, apiUrl) {
         var service = {
             create: create
         };

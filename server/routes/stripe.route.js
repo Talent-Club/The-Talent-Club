@@ -21,7 +21,7 @@ function addOrder(req, res, next) {
         })
         .then(function(charge) {
             const newOrder = new Order({
-                user: req.user,
+                member: req.member,
                 stripeCharge: charge
             });
 
