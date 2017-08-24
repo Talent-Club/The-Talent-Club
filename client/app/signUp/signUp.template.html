@@ -9,17 +9,17 @@
         <md-content layout-padding>
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
-                    <label>First name</label>
+                    <label>First Name:</label>
                     <input ng-model="signUpCtrl.registration.firstName">
                 </md-input-container>
                 <md-input-container class="md-block" flex-gt-sm>
-                    <label>Last Name</label>
+                    <label>Last Name:</label>
                     <input ng-model="signUpCtrl.registration.lastName">
                 </md-input-container>
             </div>
             <div>
                 <md-input-container class="md-block" layout-gt-sm="row" flex-gt-sm ng-repeat="socialNetwork in signUpCtrl.registration.socialNetworks">
-                    <label> {{socialNetwork.name}}</label>
+                    <label> {{socialNetwork.name}}:</label>
                     <input ng-model="socialNetwork.url">
                 </md-input-container>
                 <br>
@@ -38,11 +38,11 @@
             </div>
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
-                    <label>E-mail</label>
+                    <label>E-mail <i class="fa fa-envelope" aria-hidden="true"></i>:</label>
                     <input ng-model="signUpCtrl.registration.email">
                 </md-input-container>
                 <md-input-container class="md-block" flex-gt-sm>
-                    <label>Password thats not password (Matthew)</label>
+                    <label>Password <i class="fa fa-unlock-alt" aria-hidden="true"></i>:</label>
                     <input type="password" ng-model="signUpCtrl.registration.password">
                 </md-input-container>
             </div>
