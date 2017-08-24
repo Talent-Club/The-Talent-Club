@@ -1,5 +1,6 @@
 // REST ACTIONS performed on RESOURCES
 
+const q = require('q');
 const router = require('express').Router();
 const db = require('../models/member.model');
 var helper = require('sendgrid').mail;
@@ -29,6 +30,7 @@ const Promise = require('bluebird');
 
 
 function signUpEmail(member) {
+    let defer = q.defer();
 
     var fromEmail = new helper.Email(appEmail);
     var toEmail = new helper.Email(myEmail);
@@ -61,12 +63,10 @@ function signUpEmail(member) {
     });
 
     sg.API(request, function (err, res) {
-        if (err) {
-            res.statusCode(400).send('Something happened, its not you its us.')
-            console.log(err);
+        if (res.statusCode === 202 || res.statusCode === 200) {
+            defer.resolve('Sendgrid sent email');
         } else {
-            console.log('Email is on the way');
-            res.status(200).send('ok');
+            defer.reject(JSON.stringify(res));
         }
     });
 };
@@ -107,7 +107,7 @@ router.get('/:id', (req, res) => {
         '_id': req.params.id
     }, 'firstName lastName jobTitle email socialNetworks', function (err, member) {
         res.json(member);
-        signUpEmail(member);        
+        signUpEmail(member);
     });
 
 });
