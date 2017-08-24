@@ -1,18 +1,46 @@
-(function(){
+(function () {
     'use strict';
 
     angular
         .module('app.signUp')
         .controller('SignUpController', SignUpController)
 
-    SignUpController.$inject = ['signUpFactory'];
+    SignUpController.$inject = ['$stateParams', '$state', 'signUpFactory', 'authFactory'];
 
-    function SignUpController(signUpFactory) {
+    function SignUpController($stateParams, $state, signUpFactory, authFactory) {
         /* jshint validthis:true */
         var vm = this;
 
-        activate();
+        vm.register = register;
+        vm.registration = {
+            socialNetworks: []
+        };
 
-        function activate() { }
+        function register(registration) {
+            console.log(registration);
+            authFactory
+                .register(registration)
+
+                .then(function (response) {
+                    
+                    $state.go('pending');
+                })
+                .catch(function (error) {
+                   
+                    alert(error.error_description);
+                });
+        }
+
+        vm.addSocialNetwork = function (registration, name, url) {
+
+            registration.socialNetworks.push({
+                name: name,
+                url: url
+            });
+
+        }
+
+        
     }
+
 })();

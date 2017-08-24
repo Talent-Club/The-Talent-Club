@@ -1,25 +1,35 @@
 (function () {
-    'use strict';
+	'use strict';
 
-    angular.module('app', [
-        // Angular modules
-        'ngMaterial',
-        // Custom modules
-        'app.landing',
-		'app.login',
-		'app.pending',
-		'app.signUp',
-		'app.splash',
-		'app.stripe',
-		'app.core',
-        // 3rd Party Modules
-        'ui.router'
-    ]).config(appConfig);
+	angular.module('app', [
+			// Angular modules
+			'ngMaterial',
+			// Custom modules
+			'app.auth',
+			'app.core',
+			'app.landing',
+			'app.login',
+			'app.pending',
+			'app.signUp',
+			'app.splash',
+			'app.stripe',
+			'app.core',
+			// 3rd Party Modules
+			'ui.router',
+			'LocalStorageModule',
+			'stripe.checkout'
+		])
+		.value('apiUrl', 'http://localhost:3000/api')
+		.config(appConfig)
+		.run(appRun);
 
-	appConfig.$inject = ['$urlRouterProvider', '$stateProvider'];
+	appConfig.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider', 'StripeCheckoutProvider'];
 
-	function appConfig($urlRouterProvider, $stateProvider) {
+	function appConfig($urlRouterProvider, $stateProvider, $httpProvider, StripeCheckoutProvider) {
 		// define default page-where should the first page of the app begin
+
+		$httpProvider.interceptors.push('authInterceptorService');
+
 		$urlRouterProvider.otherwise('/landing');
 
 		// define a state : $stateProvider.state(<name>, <options>)
@@ -28,35 +38,50 @@
 			controller: 'LandingController as landingCtrl',
 			templateUrl: 'app/landing/landing.template.html'
 		});
-        
-        $stateProvider.state('login', {
+
+		$stateProvider.state('login', {
 			url: '/login',
 			controller: 'LoginController as loginCtrl',
 			templateUrl: 'app/login/login.template.html'
 		});
 
-        $stateProvider.state('pending', {
+		$stateProvider.state('pending', {
 			url: '/pending',
 			controller: 'PendingController as pendingCtrl',
 			templateUrl: 'app/pending/pending.template.html'
 		});
 
-        $stateProvider.state('signUp', {
-			url: '/signUp',
+
+		$stateProvider.state('signup', {
+			url: '/signup',
 			controller: 'SignUpController as signUpCtrl',
 			templateUrl: 'app/signUp/signUp.template.html'
 		});
 
-        $stateProvider.state('splash', {
-			url: '/splash',
+		$stateProvider.state('splash', {
+			url: '/splash?id',
 			controller: 'SplashController as splashCtrl',
 			templateUrl: 'app/splash/splash.template.html'
 		});
 
-        $stateProvider.state('stripe', {
+		$stateProvider.state('stripe', {
 			url: '/stripe',
 			controller: 'StripeController as stripeCtrl',
 			templateUrl: 'app/stripe/stripe.template.html'
 		});
-    }
+	}
+
+	appRun.$inject = ['$log', 'StripeCheckout'];
+
+	function appRun($log, StripeCheckout) {
+		// You can set defaults here, too.
+		StripeCheckout.defaults({
+			opened: function () {
+				$log.debug("Stripe Checkout opened");
+			},
+			closed: function () {
+				$log.debug("Stripe Checkout closed");
+			}
+		});
+	}
 })();

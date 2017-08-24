@@ -5,14 +5,16 @@
         .module('app.splash')
         .controller('SplashController', SplashController)
 
-    SplashController.$inject = ['splashFactory'];
+    SplashController.$inject = ['$stateParams', '$state', 'splashFactory'];
 
-    function SplashController(splashFactory) {
+    function SplashController($stateParams, $state, splashFactory) {
         /* jshint validthis:true */
         var vm = this;
 
         activate();
 
-        function activate() { }
+        function activate() {}
+
+
     }
 })();

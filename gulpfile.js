@@ -7,6 +7,13 @@ gulp.task('copy:fonts', () =>
   .pipe(gulp.dest('dist/fonts'))
 );
 
+gulp.task('copy:images', () =>
+  gulp
+  .src('client/app/images/*')
+  .pipe(gulp.dest('dist/images'))
+);
+
+
 gulp.task('copy:html', () =>
   gulp
   .src('client/**/*.html')
@@ -24,6 +31,8 @@ gulp.task('build:js', () =>
     'node_modules/angular-material/angular-material.js',
     'node_modules/angular-material-icons/angular-material-icons.js',
     'node_modules/angular-ui-router/release/angular-ui-router.js',
+    'node_modules/angular-local-storage/dist/angular-local-storage.js',
+    'node_modules/angular-stripe-checkout/angular-stripe-checkout.js',
     'client/**/*.module.js',
     'client/**/*.js'
   ])
@@ -51,6 +60,7 @@ gulp.task('watch', () => {
   gulp.watch('./client/**/*.css', ['build:css']);
   gulp.watch('./client/**/*.js', ['build:js']);
   gulp.watch('./client/**/*.html', ['copy:html']);
+  gulp.watch('./client/images/*', ['copy:images']);
 });
 
 gulp.task('serve', () =>
@@ -62,4 +72,4 @@ gulp.task('serve', () =>
   })
 );
 
-gulp.task('default', ['copy:fonts', 'copy:html', 'build:js', 'build:css', 'watch', 'serve']);
+gulp.task('default', ['copy:fonts', 'copy:images', 'copy:html', 'build:js', 'build:css', 'watch', 'serve']);
