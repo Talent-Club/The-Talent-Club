@@ -10,7 +10,7 @@
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Email</label>
-          <input>
+          <input ng-model="stripeCtrl.email">
         </md-input-container>
       </div>
       <br>
@@ -18,18 +18,23 @@
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Card Number</label>
-          <input>
+          <input ng-model="stripeCtrl.source.id">
         </md-input-container>
       </div>
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
-          <label>MM/YY</label>
-          <input>
+          <label>Expiration Month</label>
+          <input ng-model="stripeCtrl.source.exp_month">
+          <!--<input ng-model="signUpCtrl.registration.firstName">-->
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Expiration Year</label>
+          <input ng-model="stripeCtrl.source.exp_year">
           <!--<input ng-model="signUpCtrl.registration.firstName">-->
         </md-input-container>
         <md-input-container class="md-block" flex-gt-sm>
           <label>CVC</label>
-          <input>
+          <input ng-model="stripeCtrl.source.cvc_check">
           <!--<input ng-model="signUpCtrl.registration.lastName">-->
         </md-input-container>
       </div>
@@ -38,10 +43,12 @@
         <md-button class="md-raised md-warn">
           Pay 2 Million dollars!
         </md-button>
-        <md-button class="md-primary md-raised" ng-click="signUpCtrl.register(signUpCtrl.registration)">
+        <md-button class="md-primary md-raised" ng-click="stripeCtrl.buy(stripeCtrl.product)">
           Pay 1 Million Dollars!
         </md-button>
       </div>
     </md-content>
   </div>
 </div>
+
+<pre>{{stripeCtrl | json}}</pre>

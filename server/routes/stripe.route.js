@@ -14,7 +14,7 @@ function addOrder(req, res, next) {
     stripe
         .charges
         .create({
-            amount: req.body.retailPrice * 100,
+            amount: 100,
             currency: 'usd',
             source: req.params.stripeToken,
             description: 'Talent-club'

@@ -37,9 +37,9 @@ gulp.task('build:js', () =>
     'client/**/*.js'
   ])
   .pipe($.concat('bundle.min.js'))
-  .pipe($.uglify().on('error', (err) => {
-    console.log(`Error: ${err}`);
-  }))
+  // .pipe($.uglify().on('error', (err) => {
+  //   console.log(`Error: ${err}`);
+  // }))
   .pipe(gulp.dest('dist/js'))
 );
 
