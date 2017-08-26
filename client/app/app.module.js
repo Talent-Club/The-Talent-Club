@@ -5,6 +5,7 @@
 			// Angular modules
 			'ngMaterial',
 			// Custom modules
+			'app.admin',
 			'app.auth',
 			'app.core',
 			'app.landing',
@@ -72,6 +73,12 @@
 			url: '/stripe',
 			controller: 'StripeController as stripeCtrl',
 			templateUrl: 'app/stripe/stripe.template.html'
+		});
+
+		$stateProvider.state('admin', {
+			url: '/admin',
+			controller: 'AdminController as adminCtrl',
+			templateUrl: 'app/admin/admin.template.html'
 		});
 	}
 

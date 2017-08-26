@@ -1,0 +1,29 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th width="1%">VIP</th>
+            <th>Name</th>
+            <th>Email</th>
+            
+            <th width="7%">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="member in adminCtrl.members">
+            <td><i class="fa fa-star" ng-class="member.isMember ? 'is-member' : 'not-member' "></i></td>
+            <td>{{member.firstName}} {{member.lastName}}</td>
+            <td>{{member.email || 'N/A'}}</td>
+            <td>{{member.url || 'N/A'}}</td>
+            <td>
+                <div class="btn-group">
+                    <button class="button btn-primary">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <button class="button btn-danger" ng-click="membersGridCtrl.remove({id: member.id})">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
