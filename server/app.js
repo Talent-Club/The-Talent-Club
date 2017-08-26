@@ -29,6 +29,7 @@ app.use('/api/signup', require('./routes/signUp.route'));
 app.use('/api/splash', require('./routes/splash.route.js'));
 app.use('/api/stripe', require('./routes/stripe.route.js'));
 app.use('/api/login', require('./routes/user.route.js'));
+app.use('/api/admin', require('./routes/admin.route.js'));
 
 
 app.use(function(err, req, res, next) {

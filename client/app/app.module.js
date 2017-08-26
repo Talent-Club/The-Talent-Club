@@ -5,6 +5,7 @@
 			// Angular modules
 			'ngMaterial',
 			// Custom modules
+			'app.admin',
 			'app.auth',
 			'app.core',
 			'app.landing',
@@ -27,6 +28,10 @@
 
 	function appConfig($urlRouterProvider, $stateProvider, $httpProvider, StripeCheckoutProvider) {
 		// define default page-where should the first page of the app begin
+
+		StripeCheckoutProvider.defaults({
+                key: 'pk_test_A6aawS4muwkwSlOWuTYv1m2I'
+            })
 
 		$httpProvider.interceptors.push('authInterceptorService');
 
@@ -68,6 +73,12 @@
 			url: '/stripe',
 			controller: 'StripeController as stripeCtrl',
 			templateUrl: 'app/stripe/stripe.template.html'
+		});
+
+		$stateProvider.state('admin', {
+			url: '/admin',
+			controller: 'AdminController as adminCtrl',
+			templateUrl: 'app/admin/admin.template.html'
 		});
 	}
 
