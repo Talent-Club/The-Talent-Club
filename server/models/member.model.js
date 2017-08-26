@@ -25,10 +25,7 @@ const MemberSchema = new Schema({
     isMember: Boolean,
     hasPaid: Boolean,
     activatedSlack: Boolean,
-    socialNetworks: [{
-        name: String,
-        url: String
-    }],
+    linkedIn: String,
     stripeCharge: { type: Object }
 });
 

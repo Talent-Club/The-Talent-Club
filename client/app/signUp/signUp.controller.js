@@ -13,7 +13,7 @@
 
         vm.register = register;
         vm.registration = {
-            socialNetworks: []
+            isMember: false
         };
 
         function register(registration) {
@@ -31,9 +31,9 @@
                 });
         }
 
-        vm.addSocialNetwork = function (registration, name, url) {
+        vm.addSocialNetwork = function (registration) {
 
-            registration.socialNetworks.push({
+            registration.linkedIn.push({
                 name: name,
                 url: url
             });
