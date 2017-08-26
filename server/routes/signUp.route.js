@@ -83,6 +83,7 @@ router.post('/', function register(req, res, next) {
             lastName: req.body.lastName,
             email: req.body.email,
             password: req.body.password,
+            isMember : false,
         });
 
         newMember

@@ -29,6 +29,10 @@
 	function appConfig($urlRouterProvider, $stateProvider, $httpProvider, StripeCheckoutProvider) {
 		// define default page-where should the first page of the app begin
 
+		StripeCheckoutProvider.defaults({
+                key: 'pk_test_A6aawS4muwkwSlOWuTYv1m2I'
+            })
+
 		$httpProvider.interceptors.push('authInterceptorService');
 
 		$urlRouterProvider.otherwise('/landing');
