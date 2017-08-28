@@ -46,3 +46,12 @@ md-button.md-default-theme.md-accent,
 md-nav-bar md-nav-ink-bar {
   background: white;
 }
+
+.is-member {
+   color:gold;
+}
+
+.not-member {
+   opacity: .2;
+   color: lightgrey;
+}

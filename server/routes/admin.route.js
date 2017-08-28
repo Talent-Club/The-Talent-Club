@@ -12,9 +12,8 @@ router.get('/', function (req, res) {
 router.get('/:id', (req, res) => {
   db.findOne({
     '_id': req.params.id
-  }, 'firstName lastName jobTitle email socialNetworks', function (err, member) {
+  }, 'firstName lastName email linkedIn isMember', function (err, member) {
     res.json(member);
-    signUpEmail(member);
   });
 });
 
@@ -29,7 +28,7 @@ router.post('/', function (req, res) {
 
 // UPDATE
 router.put('/:id', function (req, res) {
-  db.findById(req.params.id).then(function (member) {
+  db.findOne(req.params.id).then(function (member) {
     member.update(req.body).then(function () {
       res.sendStatus(204);
     });

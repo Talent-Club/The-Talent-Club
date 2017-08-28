@@ -10,19 +10,6 @@ const myEmail = process.env.MYEMAIL;
 const newAppTemp = process.env.NEWAPP_TEMPLATE;
 const appEmail = process.env.APP_EMAIL;
 
-router.post('/', function (req, res) {
-    console.log(req.body);
-    const newMember = new db(req.body);
-
-    newMember.save(function (err) {
-        if (err) {
-            res.send('an error has occured: ' + err)
-        } else {
-            res.send('Yes')
-        }
-    });
-});
-
 // const email = process.env.EMAIL; 
 const requiresAuth = require('../lib/requiresAuth');
 const jwt = require('jsonwebtoken');
@@ -30,8 +17,6 @@ const Promise = require('bluebird');
 
 
 function signUpEmail(member) {
-    let defer = q.defer();
-
     var fromEmail = new helper.Email(appEmail);
     var toEmail = new helper.Email(myEmail);
     var subject = 'A new application has been submitted!';
@@ -45,15 +30,13 @@ function signUpEmail(member) {
         '%name%': member.firstName
     });
     personalization.addSubstitution({
-        '%url%': member.socialNetworks[0].url
+        '%url%': member.linkedIn
     });
     personalization.addSubstitution({
         '%email%': member.email
     });
 
     mail.addPersonalization(personalization);
-
-
 
     var sg = require('sendgrid')(sendGridAPI);
     var request = sg.emptyRequest({
@@ -62,17 +45,19 @@ function signUpEmail(member) {
         body: mail.toJSON()
     });
 
-    sg.API(request, function (err, res) {
-        if (res.statusCode === 202 || res.statusCode === 200) {
-            defer.resolve('Sendgrid sent email');
-        } else {
-            defer.reject(JSON.stringify(res));
-        }
+    return new Promise((resolve, reject) => {
+        sg.API(request, function (err, res) {
+            if (res.statusCode === 202 || res.statusCode === 200) {
+                resolve('Sendgrid sent email');
+            } else {
+                reject(JSON.stringify(res));
+            }
+        });
     });
 };
 
-router.post('/', function register(req, res, next) {
-    console.log(req.body);
+router.post('/', function register(req, res) {
+    
     if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.password) {
         res.status(400).json({
             errors: ['Please enter all required fields']
@@ -82,31 +67,31 @@ router.post('/', function register(req, res, next) {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
+            linkedIn: req.body.linkedIn,
             password: req.body.password,
-            isMember : false,
+            isMember: false,
         });
-
+        
         newMember
             .save()
+            .then(signUpEmail)
             .then(() => res.json({
                 message: 'Successfully registered new user'
             }))
             .catch(err => {
-                if (err.code && err.code === 11000) {
-                    res.status(400).send({
-                        'errors': ['Email already registered']
-                    });
-                } else {
-                    next(err);
-                }
+                console.error(err);
+                res.status(400).send({
+                    'errors': ['Email already registered']
+                });
             });
+            console.log(newMember);
     }
 });
 
 router.get('/:id', (req, res) => {
     db.findOne({
         '_id': req.params.id
-    }, 'firstName lastName jobTitle email socialNetworks', function (err, member) {
+    }, 'firstName lastName email linkedIn', function (err, member) {
         res.json(member);
         signUpEmail(member);
     });
