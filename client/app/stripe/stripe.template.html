@@ -1,50 +1,39 @@
 <div layout="row" layout-align="center center">
   <div class="md-whiteframe-z1" flex=50 layout-align="center center">
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Payment</h2>
-      </div>
-    </md-toolbar>
-
-    <md-content layout-padding>
-      <div layout-gt-sm="row">
-        <md-input-container class="md-block" flex-gt-sm>
-          <label>Email</label>
-          <input ng-model="stripeCtrl.email">
-        </md-input-container>
-      </div>
+      <md-toolbar id="toolbar" class="md-hue-3">
+          <div class="md-toolbar-tools">
+              <h2>Payment</h2>
+          </div>
+      </md-toolbar>
       <br>
-      <br>
-      <div layout-gt-sm="row">
-        <md-input-container class="md-block" flex-gt-sm>
-          <label>Card Number</label>
-          <input ng-model="stripeCtrl.source.id">
-        </md-input-container>
-      </div>
-      <div layout-gt-sm="row">
-        <md-input-container class="md-block" flex-gt-sm>
-          <label>Expiration Month</label>
-          <input ng-model="stripeCtrl.source.exp_month">
-          <!--<input ng-model="signUpCtrl.registration.firstName">-->
-        </md-input-container>
-        <md-input-container class="md-block" flex-gt-sm>
-          <label>Expiration Year</label>
-          <input ng-model="stripeCtrl.source.exp_year">
-          <!--<input ng-model="signUpCtrl.registration.firstName">-->
-        </md-input-container>
-        <md-input-container class="md-block" flex-gt-sm>
-          <label>CVC</label>
-          <input ng-model="stripeCtrl.source.cvc_check">
-          <!--<input ng-model="signUpCtrl.registration.lastName">-->
-        </md-input-container>
-      </div>
+      <div class="container">
+          <table class="table table-striped table-hover table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Premium Membership</th>
+                        <th>Total Price</th>
+                    </tr>
+                    <tr>
+                        <td>
+                          <ul>
+                          <li>Access to a private slack channel for networking. </li>
+                          <li>Access to exclusive meetup group for all levels of expertise.</li>
+                          </ul>
+                        </td>
+                        <td>$100.00</td>
+                    </tr>
+                    <tr>
+                        <th colspan="1"><span class="pull-right">Total</span></th>
+                        <th>$100.00</th>
+                    </tr>
+                </tbody>
+            </table>            
+        </div>
+    
 
       <div layout="row" layout-align="end center">
-        <md-button class="md-raised md-warn">
-          Pay 2 Million dollars!
-        </md-button>
-        <md-button class="md-primary md-raised" ng-click="stripeCtrl.buy(stripeCtrl.product)">
-          Pay 1 Million Dollars!
+        <md-button id="nextButtons" class="md-raised" ng-click="stripeCtrl.buy(stripeCtrl.product)">
+          Checkout
         </md-button>
       </div>
     </md-content>
