@@ -18,7 +18,7 @@
 
         function create(stripeToken) {
           return $http
-            .post(apiUrl + 'stripe/' + stripeToken)
+            .post(apiUrl + '/stripe/' + stripeToken)
             .then(function(response) {
               return response.data;
             });

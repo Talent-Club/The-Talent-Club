@@ -26,8 +26,8 @@ footer {
 }
 
 .square {
-    width: 350px;
-    height: 350px;
+    width: 400px;
+    height: 400px;
 }
 
 .small {
@@ -46,7 +46,6 @@ md-button.md-default-theme.md-accent,
 md-nav-bar md-nav-ink-bar {
   background: white;
 }
-
 .is-member {
    color:gold;
 }
@@ -54,4 +53,16 @@ md-nav-bar md-nav-ink-bar {
 .not-member {
    opacity: .2;
    color: lightgrey;
+ 
+#toolbar {
+    background:#8ddaef;
+}
+.embedly-card{
+    width: 450px;
+    height: 400px;
+    margin-right: 25px;
+}
+#nextButtons {
+    background-color: #8ddaef;
+ 
 }
