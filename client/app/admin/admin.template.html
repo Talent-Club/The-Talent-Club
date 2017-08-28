@@ -16,10 +16,10 @@
             <td>{{member.url || 'N/A'}}</td>
             <td>
                 <div class="btn-group">
-                    <button class="button btn-primary">
-                        <i class="fa fa-edit"></i>
+                    <button class="button btn-primary"  ng-click="adminCtrl.yesMember(adminCtrl.makeMember)">
+                        <i class="fa fa-check"></i>
                     </button>
-                    <button class="button btn-danger" ng-click="membersGridCtrl.remove({id: member.id})">
+                    <button class="button btn-danger" ng-click="adminCtrl.remove({id: member.id})">
                         <i class="fa fa-trash"></i>
                     </button>
                 </div>

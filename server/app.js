@@ -16,7 +16,7 @@ const db = require('./models/member.model');
 
 var mongodbUri = 'mongodb://Keaton:talentclub1@ds133670.mlab.com:33670/talent-club';
 mongoose.connect(mongodbUri, { useMongoClient: true });
-
+mongoose.Promise = require('bluebird');
 
 app.use(express.static(path.resolve('dist')));
 app.use(bodyParser.json());

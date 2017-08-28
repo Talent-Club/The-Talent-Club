@@ -30,16 +30,6 @@
                     alert(error.error_description);
                 });
         }
-
-        vm.addSocialNetwork = function (registration) {
-
-            registration.linkedIn.push({
-                name: name,
-                url: url
-            });
-
-        }
-
         
     }
 

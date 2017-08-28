@@ -46,6 +46,14 @@ md-button.md-default-theme.md-accent,
 md-nav-bar md-nav-ink-bar {
   background: white;
 }
+.is-member {
+   color:gold;
+}
+
+.not-member {
+   opacity: .2;
+   color: lightgrey;
+ 
 #toolbar {
     background:#8ddaef;
 }
@@ -56,4 +64,5 @@ md-nav-bar md-nav-ink-bar {
 }
 #nextButtons {
     background-color: #8ddaef;
+ 
 }
