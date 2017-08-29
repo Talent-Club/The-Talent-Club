@@ -5,9 +5,9 @@
         .module('app.stripe')
         .controller('StripeController', StripeController)
 
-    StripeController.$inject = ['stripeFactory', 'StripeCheckout'];
+    StripeController.$inject = ['stripeFactory', 'StripeCheckout', '$stateParams', '$state', 'SweetAlert'];
 
-    function StripeController(stripeFactory, StripeCheckout) {
+    function StripeController(stripeFactory, StripeCheckout, $stateParams, $state, SweetAlert) {
         /* jshint validthis:true */
         var vm = this;
         vm.buy = buy;
@@ -21,8 +21,7 @@
 
         function buy(product) {
             var options = {
-                // description: product.name,
-                amount:  100
+                amount:  9999
             };
 
             handler.open(options)
@@ -32,10 +31,11 @@
                     
 
                     stripeFactory
-                        .create(stripeToken)
-                        .then(function () {
+                        .create($stateParams.memberId, stripeToken)
+                        .then(function (stripeToken) {
                             console.log(stripeToken);
-                            alert('Thank you for joining the Talent Club!');
+                            SweetAlert.swal("Welcome to The Talent Club", "Congrats!", "success")
+                            $state.go('login');
                         });
                 });
         }

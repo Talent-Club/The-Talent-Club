@@ -18,7 +18,8 @@
 			// 3rd Party Modules
 			'ui.router',
 			'LocalStorageModule',
-			'stripe.checkout'
+			'stripe.checkout',
+			'oitozero.ngSweetAlert'
 		])
 		.value('apiUrl', 'http://localhost:3000/api')
 		.config(appConfig)
@@ -70,7 +71,7 @@
 		});
 
 		$stateProvider.state('stripe', {
-			url: '/stripe',
+			url: '/stripe?memberId',
 			controller: 'StripeController as stripeCtrl',
 			templateUrl: 'app/stripe/stripe.template.html'
 		});
