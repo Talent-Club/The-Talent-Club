@@ -11,11 +11,7 @@
         /* jshint validthis:true */
         var vm = this;
         vm.remove = remove;
-        vm.yesMember= yesMember;
-
-        vm.makeMember = {
-            isMember: true
-        };
+        vm.makeMember= makeMember;
 
         activate();
 
@@ -28,24 +24,22 @@
         };
 
         function remove(member) {
-            var confirm = confirm("Are you sure you want to delete?")
-            if (confirm == true)
+            var x = confirm("Are you sure you want to delete?")
+            if (x)
                 adminFactory
                 .remove(member)
                 .then(function () {
-                    alert('Member has been deleted');
                     activate();
                 });
         };
 
 
 
-        function yesMember(makeMember) {
-            console.log(makeMember);
-            authFactory
-                .register(makeMember)
+        function makeMember(member) {
+            adminFactory
+                .update(member)
                 .then(function (response){
-                    console.log(makeMember)
+                    console.log(response)
                     activate();
                 })
                 .catch(function (error) {

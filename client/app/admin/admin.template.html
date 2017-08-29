@@ -1,9 +1,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th width="1%">VIP</th>
+            <th width="1%">Member</th>
             <th>Name</th>
             <th>Email</th>
+            <th>LinkedIn</th>
             
             <th width="7%">Actions</th>
         </tr>
@@ -13,13 +14,13 @@
             <td><i class="fa fa-star" ng-class="member.isMember ? 'is-member' : 'not-member' "></i></td>
             <td>{{member.firstName}} {{member.lastName}}</td>
             <td>{{member.email || 'N/A'}}</td>
-            <td>{{member.url || 'N/A'}}</td>
+            <td>{{member.linkedIn || 'N/A'}}</td>
             <td>
                 <div class="btn-group">
-                    <button class="button btn-primary"  ng-click="adminCtrl.yesMember(adminCtrl.makeMember)">
+                    <button class="button btn-primary"  ng-click="adminCtrl.makeMember(member)">
                         <i class="fa fa-check"></i>
                     </button>
-                    <button class="button btn-danger" ng-click="adminCtrl.remove({id: member.id})">
+                    <button class="button btn-danger" ng-click="adminCtrl.remove(member)">
                         <i class="fa fa-trash"></i>
                     </button>
                 </div>
