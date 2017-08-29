@@ -1,6 +1,6 @@
 const q = require('q');
 const router = require('express').Router();
-const db = require('../models/member.model');
+const Member = require('../models/member.model');
 var helper = require('sendgrid').mail;
 const sendGridAPI = process.env.SENDGRID_API_KEY;
 
@@ -48,13 +48,13 @@ function congratsEmail(member) {
 
 //GET: /api/
 router.get('/', function (req, res) {
-  db.find({}).then(function (members) {
+  Member.find({}).then(function (members) {
     res.json(members);
   });
 });
 
 router.get('/:id', (req, res) => {
-  db.findOne({
+  Member.findOne({
     '_id': req.params.id
   }, 'firstName lastName email linkedIn isMember', function (err, member) {
     res.json(member);
@@ -63,7 +63,7 @@ router.get('/:id', (req, res) => {
 
 // UPDATE
 router.put('/:id', function (req, res) {
-  db.findByIdAndUpdate({
+  Member.findByIdAndUpdate({
       '_id': req.params.id
     }, {
       $set: {
@@ -75,13 +75,14 @@ router.put('/:id', function (req, res) {
     function (err, member) {
       if (err) return handleError(err);
       res.send(member);
+      console.log(member);
       congratsEmail(member);
     });
 });
 
 // DELETE
 router.delete('/:id', function (req, res) {
-  db.findByIdAndRemove({
+  Member.findByIdAndRemove({
     '_id': req.params.id
   }, function (err, member) {
     if (err) return handleError(err);

@@ -5,13 +5,13 @@
         .module('app.admin')
         .controller('AdminController', AdminController)
 
-    AdminController.$inject = ['$stateParams', '$state', 'adminFactory', 'authFactory'];
+    AdminController.$inject = ['$stateParams', '$state', 'adminFactory', 'authFactory', 'SweetAlert'];
 
-    function AdminController($stateParams, $state, adminFactory, authFactory) {
+    function AdminController($stateParams, $state, adminFactory, authFactory, SweetAlert) {
         /* jshint validthis:true */
         var vm = this;
         vm.remove = remove;
-        vm.makeMember= makeMember;
+        vm.makeMember = makeMember;
 
         activate();
 
@@ -24,13 +24,28 @@
         };
 
         function remove(member) {
-            var x = confirm("Are you sure you want to delete?")
-            if (x)
-                adminFactory
-                .remove(member)
-                .then(function () {
-                    activate();
-                });
+            SweetAlert.swal({
+                    title: "Are you sure?",
+                    text: "Your will not be able to recover this information",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: false
+                },
+                function (cancelled) {
+                    console.log(cancelled)
+                    if (cancelled) {
+                        adminFactory
+                            .remove(member)
+                            .then(function () {
+                                activate();
+                                SweetAlert.swal("Deleted!", 'User was deleted', 'success');
+                            });
+                    };
+            });
+
+
         };
 
 
@@ -38,7 +53,7 @@
         function makeMember(member) {
             adminFactory
                 .update(member)
-                .then(function (response){
+                .then(function (response) {
                     console.log(response)
                     activate();
                 })
