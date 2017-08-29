@@ -16,9 +16,9 @@
 
         return service;
 
-        function create(stripeToken) {
+        function create(memberId, stripeToken) {
           return $http
-            .post(apiUrl + '/stripe/' + stripeToken)
+            .post(apiUrl + '/stripe/' + memberId + '/' + stripeToken)
             .then(function(response) {
               return response.data;
             });

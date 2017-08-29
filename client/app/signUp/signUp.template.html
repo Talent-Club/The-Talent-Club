@@ -28,30 +28,6 @@
                         <input ng-model="signUpCtrl.registration.linkedIn">
                     </md-input-container>
                 </div>
-
-
-
-
-                <!--This code is for a dropdown menu if it wants to be implmented later-->
-                <!--<md-input-container class="md-block" layout-gt-sm="row" flex-gt-sm ng-repeat="socialNetwork in signUpCtrl.registration.socialNetworks">
-
-                    <label> {{socialNetwork.name}}</label>
-
-                    <input ng-model="socialNetwork.url">
-                </md-input-container>
-                <br>
-            </div>
-            <div layout-gt-sm="row">
-                <md-input-container class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Add Social Network <span class="caret"></span>
-                        </button>
-                    <ul class="dropdown-menu">
-                        <li ng-repeat="name in ['Facebook', 'LinkedIn', 'GitHub']">
-                            <a ng-click="signUpCtrl.addSocialNetwork(signUpCtrl.registration, name, signUpCtrl.registration.socialNetworks.url)">{{name}}</a>
-                        </li>
-                    </ul>
-                </md-input-container>-->
             </div>
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
@@ -73,7 +49,3 @@
         </md-content>
     </div>
 </div>
-
-<pre>
-{{ signUpCtrl | json}}
-</pre>

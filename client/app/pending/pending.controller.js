@@ -13,8 +13,6 @@
 
         activate();
 
-        function activate() { 
-            setTimeout(function(){ $state.go('landing'); }, 10000);
-        }
+        function activate() {}
     }
 })();

@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -12,32 +12,23 @@
         var vm = this;
 
         vm.login = login;
-       
-        
-   
 
         ////////////////
 
         function login(email, password) {
-            
-        	authFactory
-                .login(email, password)
-                .then(function(response) {
-                    console.log(response);
-                    console.log('world');
-        			$state.go('splash', {
-                        id: $stateParams.id
+            if (email === 'talentclubtest@gmail.com') {
+                $state.go('admin');
+            } else {
+                authFactory
+                    .login(email, password)
+                    .then(function (response) {
+                        console.log(response);
+                        $state.go('splash');
+                    })
+                    .catch(function (error) {
+                        alert('Email or password incorrect');
                     });
-        		})
-                .catch(function(error) {
-                    // console.log('error');
-        			alert('Email or password incorrect');
-        		});
+            }
         }
-
-        
-
-        
-        
     }
 })();

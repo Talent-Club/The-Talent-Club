@@ -1,34 +1,40 @@
 const router = require('express').Router();
 const requiresAuth = require('../lib/requiresAuth');
-const db = require('../models/member.model');
+const Member = require('../models/member.model');
 const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
 
-router.route('/:stripeToken')
-            .post(requiresAuth(), addOrder);
+router.route('/:memberId/:stripeToken')
+            .post(addOrder);
 
 module.exports = router;
 
 //////////////
 
-function addOrder(req, res, next) {
+function addOrder(req, res) {
     stripe
         .charges
         .create({
-            amount: 100,
+            amount: 9999,
             currency: 'usd',
             source: req.params.stripeToken,
             description: 'Talent-club'
         })
-        .then(function(charge) {
-            const newOrder = new Order({
+        .then(() => {
+            console.log(req.params.memberId);
 
-                member: req.member,
+            return Member
+                .findById(req.params.memberId)
+                .then(function(member) {
+                    member.hasPaid = true;
 
-                stripeCharge: charge
-            });
-
-            return newOrder.save();  
+                    return member.save();
+                });
         })
-        .then(product => res.json(product))
-        .catch(next);
+        .then(order => res.sendStatus(200))
+        .catch(function(error) {
+            console.log(error);
+
+            return res.sendStatus(500);
+        });
 }
+
