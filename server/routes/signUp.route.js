@@ -16,7 +16,7 @@ const jwt = require('jsonwebtoken');
 const Promise = require('bluebird');
 
 
-function signUpEmail(member) {
+function signUpEmail(newMember) {
     var fromEmail = new helper.Email(appEmail);
     var toEmail = new helper.Email(myEmail);
     var subject = 'A new application has been submitted!';
@@ -27,13 +27,13 @@ function signUpEmail(member) {
     var personalization = new helper.Personalization();
     personalization.addTo(toEmail);
     personalization.addSubstitution({
-        '%name%': member.firstName
+        '%name%': newMember.firstName
     });
     personalization.addSubstitution({
-        '%url%': member.linkedIn
+        '%url%': newMember.linkedIn
     });
     personalization.addSubstitution({
-        '%email%': member.email
+        '%email%': newMember.email
     });
 
     mail.addPersonalization(personalization);
@@ -91,10 +91,10 @@ router.post('/', function register(req, res) {
 router.get('/:id', (req, res) => {
     db.findOne({
         '_id': req.params.id
-    }, 'firstName lastName email linkedIn', function (err, member) {
+    }, 'firstName lastName email linkedIn isMember', function (err, member) {
         res.json(member);
         signUpEmail(member);
     });
-
 });
+
 module.exports = router;

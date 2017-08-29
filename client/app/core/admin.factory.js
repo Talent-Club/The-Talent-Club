@@ -44,7 +44,7 @@
 
         function update(member) {
             return $http
-                .put('/api/admin/' + member.id, member)
+                .put('/api/admin/' + member._id, member)
                 .then(function (response) {
                     return response.data;
                 });
@@ -52,7 +52,7 @@
 
         function remove(member) {
             return $http
-                .delete('/api/admin/' + member.id)
+                .delete('/api/admin/' + member._id)
                 .then(function (response) {
                     return response.data;
                 });
