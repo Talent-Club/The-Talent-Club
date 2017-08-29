@@ -9,6 +9,8 @@ const appEmail = process.env.APP_EMAIL;
 const congrats = process.env.CONGRATULATIONS_TEMPLATE;
 
 function congratsEmail(member) {
+  let defer = q.defer();
+  
   var fromEmail = new helper.Email(appEmail);
   var toEmail = new helper.Email(member.email);
   var subject = 'You are in the Club!';
@@ -38,11 +40,12 @@ function congratsEmail(member) {
   return new Promise((resolve, reject) => {
     sg.API(request, function (err, res) {
       if (res.statusCode === 202 || res.statusCode === 200) {
-        resolve('Sendgrid sent email');
+        defer.resolve('Sendgrid sent email');
       } else {
-        reject(JSON.stringify(res));
+        defer.reject(JSON.stringify(res));
       }
     });
+    return defer.promise;
   });
 };
 

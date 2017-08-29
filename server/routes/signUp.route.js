@@ -2,7 +2,7 @@
 
 const q = require('q');
 const router = require('express').Router();
-const db = require('../models/member.model');
+const Member = require('../models/member.model');
 var helper = require('sendgrid').mail;
 const sendGridAPI = process.env.SENDGRID_API_KEY;
 
@@ -63,7 +63,7 @@ router.post('/', function register(req, res) {
             errors: ['Please enter all required fields']
         });
     } else {
-        const newMember = new db({
+        const newMember = new Member({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
@@ -89,7 +89,7 @@ router.post('/', function register(req, res) {
 });
 
 router.get('/:id', (req, res) => {
-    db.findOne({
+    Member.findOne({
         '_id': req.params.id
     }, 'firstName lastName email linkedIn isMember', function (err, member) {
         res.json(member);
