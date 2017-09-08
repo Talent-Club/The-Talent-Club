@@ -56,6 +56,7 @@
                 .then(function (response) {
                     console.log(response)
                     activate();
+                    SweetAlert.swal("New Member!", 'User was added', 'success');
                 })
                 .catch(function (error) {
                     alert(error.error_description);
