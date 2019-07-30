@@ -3,11 +3,16 @@ const $ = require('gulp-load-plugins')();
 
 gulp.task('copy:fonts', () =>
   gulp
-  .src(['node_modules/font-awesome/fonts/*',
-    'node_modules/bootstrap/dist/fonts/*'
-    ])
+  .src('node_modules/font-awesome/fonts/*')
   .pipe(gulp.dest('dist/fonts'))
 );
+
+gulp.task('copy:images', () =>
+  gulp
+  .src('client/app/images/*')
+  .pipe(gulp.dest('dist/images'))
+);
+
 
 gulp.task('copy:html', () =>
   gulp
@@ -26,13 +31,17 @@ gulp.task('build:js', () =>
     'node_modules/angular-material/angular-material.js',
     'node_modules/angular-material-icons/angular-material-icons.js',
     'node_modules/angular-ui-router/release/angular-ui-router.js',
+    'node_modules/angular-local-storage/dist/angular-local-storage.js',
+    'node_modules/angular-stripe-checkout/angular-stripe-checkout.js',
+    'node_modules/sweetalert/dist/sweetalert.min.js',
+    'node_modules/angular-sweetalert/SweetAlert.min.js',
     'client/**/*.module.js',
     'client/**/*.js'
   ])
   .pipe($.concat('bundle.min.js'))
-  .pipe($.uglify().on('error', (err) => {
-    console.log(`Error: ${err}`);
-  }))
+  // .pipe($.uglify().on('error', (err) => {
+  //   console.log(`Error: ${err}`);
+  // }))
   .pipe(gulp.dest('dist/js'))
 );
 
@@ -42,6 +51,7 @@ gulp.task('build:css', () =>
     'node_modules/bootstrap/dist/css/bootstrap.css',
     'node_modules/angular-material/angular-material.css',
     'node_modules/font-awesome/css/font-awesome.css',
+    'node_modules/sweetalert/dist/sweetalert.css',
     'client/**/*.css'
   ])
   .pipe($.concat('bundle.min.css'))
@@ -53,6 +63,7 @@ gulp.task('watch', () => {
   gulp.watch('./client/**/*.css', ['build:css']);
   gulp.watch('./client/**/*.js', ['build:js']);
   gulp.watch('./client/**/*.html', ['copy:html']);
+  gulp.watch('./client/images/*', ['copy:images']);
 });
 
 gulp.task('serve', () =>
@@ -64,4 +75,4 @@ gulp.task('serve', () =>
   })
 );
 
-gulp.task('default', ['copy:fonts', 'copy:html', 'build:js', 'build:css', 'watch', 'serve']);
+gulp.task('default', ['copy:fonts', 'copy:images', 'copy:html', 'build:js', 'build:css', 'watch', 'serve']);
