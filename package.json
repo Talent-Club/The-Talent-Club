@@ -8,7 +8,7 @@
     "angular-local-storage": "^0.6.0",
     "angular-stripe-checkout": "^5.1.0",
     "angular-sweetalert": "^1.1.2",
-    "bcrypt": "^1.0.2",
+    "bcrypt": "^5.0.0",
     "bluebird": "^3.5.0",
     "body-parser": "^1.14.0",
     "bootstrap": "^3.3.7",
